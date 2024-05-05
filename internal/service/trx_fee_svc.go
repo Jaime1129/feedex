@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/jaime1129/fedex/internal/componets"
+	"github.com/jaime1129/fedex/internal/components"
 	"github.com/shopspring/decimal"
 )
 
@@ -17,15 +17,15 @@ type TrxFeeService interface {
 
 type trxFeeService struct {
 	apiKey     string
-	ethScanCli componets.EthScanCli
-	bnPriceCli componets.BnPriceCli
+	ethScanCli components.EthScanCli
+	bnPriceCli components.BnPriceCli
 }
 
 func NewTrxService(apiKey string) TrxFeeService {
 	return &trxFeeService{
 		apiKey:     apiKey,
-		ethScanCli: componets.NewEthScanCli(apiKey),
-		bnPriceCli: componets.NewBnPriceCLi(),
+		ethScanCli: components.NewEthScanCli(apiKey),
+		bnPriceCli: components.NewBnPriceCLi(),
 	}
 }
 
