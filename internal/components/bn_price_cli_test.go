@@ -1,17 +1,10 @@
 package components
 
 import (
-	"testing"
-
 	"github.com/jarcoal/httpmock"
-	"github.com/onsi/ginkgo"
+	ginkgo "github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
 )
-
-func TestBnPriceCli(t *testing.T) {
-	gomega.RegisterFailHandler(ginkgo.Fail)
-	ginkgo.RunSpecs(t, "BnPriceCli Suite")
-}
 
 var _ = ginkgo.Describe("BnPriceCli", func() {
 	var (

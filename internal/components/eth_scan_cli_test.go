@@ -4,13 +4,13 @@ import (
 	"testing"
 
 	"github.com/jarcoal/httpmock"
-	"github.com/onsi/ginkgo"
+	ginkgo "github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
 )
 
-func TestEthScanCli(t *testing.T) {
+func Test(t *testing.T) {
 	gomega.RegisterFailHandler(ginkgo.Fail)
-	ginkgo.RunSpecs(t, "EthScanCli Suite")
+	ginkgo.RunSpecs(t, "Running Test Suite")
 }
 
 var _ = ginkgo.Describe("EthScanCli", func() {
