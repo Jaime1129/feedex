@@ -40,7 +40,8 @@ func (c *trxFeeService) GetSingleTrxFee(ctx context.Context, req *GetSingleTrxFe
 		return nil, errors.New("nil req")
 	}
 	// send query to etherscan api
-	url := fmt.Sprintf("https://api.etherscan.io/api?module=proxy&action=eth_getTransactionByHash&txhash=%s&apikey=%s", req.TrxHash, c.apiKey)
+	url := fmt.Sprintf("https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash=%s&apikey=%s", req.TrxHash, c.apiKey)
+	fmt.Println("ethscan api url: " + url)
 	resp, err := http.Get(url)
 	if err != nil {
 		return nil, err
@@ -51,6 +52,8 @@ func (c *trxFeeService) GetSingleTrxFee(ctx context.Context, req *GetSingleTrxFe
 	if err != nil {
 		return nil, err
 	}
+
+	fmt.Println("ethscan api resp body: " + string(body))
 
 	trxResp := &EthScanTrxResponse{}
 	err = json.Unmarshal(body, trxResp)
@@ -99,7 +102,7 @@ type EthScanError struct {
 }
 
 func hexToInt(hexStr string) (int64, error) {
-	hexStr = strings.TrimPrefix(hexStr, "Ox")
+	hexStr = strings.TrimPrefix(hexStr, "0x")
 	// base 16 for hexadecimal, 64 bits
 	decimalValue, err := strconv.ParseInt(hexStr, 16, 64)
 	if err != nil {
