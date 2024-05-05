@@ -28,11 +28,11 @@ func NewTrxService(apiKey string) TrxFeeService {
 }
 
 type GetSingleTrxFeeRequest struct {
-	txHash string
+	TrxHash string
 }
 
 type GetSingleTrxFeeResponse struct {
-	trxFee string
+	TrxFee string `json:"trx_fee"`
 }
 
 func (c *trxFeeService) GetSingleTrxFee(ctx context.Context, req *GetSingleTrxFeeRequest) (*GetSingleTrxFeeResponse, error) {
@@ -40,7 +40,7 @@ func (c *trxFeeService) GetSingleTrxFee(ctx context.Context, req *GetSingleTrxFe
 		return nil, errors.New("nil req")
 	}
 	// send query to etherscan api
-	url := fmt.Sprintf("https://api.etherscan.io/api?module=proxy&action=eth_getTransactionByHash&txhash=%s&apikey=%s", req.txHash, c.apiKey)
+	url := fmt.Sprintf("https://api.etherscan.io/api?module=proxy&action=eth_getTransactionByHash&txhash=%s&apikey=%s", req.TrxHash, c.apiKey)
 	resp, err := http.Get(url)
 	if err != nil {
 		return nil, err
@@ -58,6 +58,12 @@ func (c *trxFeeService) GetSingleTrxFee(ctx context.Context, req *GetSingleTrxFe
 		return nil, err
 	}
 
+	// check if api call returns error
+	if trxResp.Error.Code != 0 {
+		fmt.Println("ethscan api call returns error: " + trxResp.Error.Message)
+		return nil, errors.New("ethscan api call returns error")
+	}
+
 	gasUsed, err := hexToInt(trxResp.Result.GasUsed)
 	if err != nil {
 		return nil, err
@@ -73,17 +79,23 @@ func (c *trxFeeService) GetSingleTrxFee(ctx context.Context, req *GetSingleTrxFe
 	// todo: get eth price in USDT
 
 	return &GetSingleTrxFeeResponse{
-		trxFee: gasInETH.String(),
+		TrxFee: gasInETH.String(),
 	}, nil
 }
 
 type EthScanTrxResponse struct {
 	Result EthScanTrxResult `json:"result"`
+	Error  EthScanError     `json:"error"`
 }
 
 type EthScanTrxResult struct {
 	EffectiveGasPrice string `json:"effectiveGasPrice"`
 	GasUsed           string `json:"gasUsed"`
+}
+
+type EthScanError struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
 }
 
 func hexToInt(hexStr string) (int64, error) {
@@ -98,5 +110,6 @@ func hexToInt(hexStr string) (int64, error) {
 }
 
 func calculateFeeInETH(gasUsed int64, gasPrice int64) decimal.Decimal {
+	// convert gasPrice in Wei to Eth, then multiply with gasUsed
 	return decimal.NewFromInt(gasPrice).Div(decimal.NewFromInt(1e18)).Mul(decimal.NewFromInt(gasUsed))
 }

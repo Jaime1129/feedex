@@ -43,7 +43,6 @@ input:
 
 output:
 - trx_fee, string, decimal number
-- trx_time, int, unix timestamp in seconds
 
 ### Batch query transaction fees given time period
 input:
