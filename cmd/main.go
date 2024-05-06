@@ -25,8 +25,8 @@ func main() {
 	ethScanCli := components.NewEthScanCli(ethscanAPIKey)
 	bnPriceCli := components.NewBnPriceCLi()
 
-	svc := service.NewTrxService(ethScanCli, bnPriceCli)
 	repo := repository.NewRepository(dsn)
+	svc := service.NewTrxService(ethScanCli, bnPriceCli, repo)
 
 	t := jobs.NewDataTracker(
 		ctx,
@@ -81,6 +81,7 @@ func setupRouter(c controller.TrxFeeController) *gin.Engine {
 	{
 		trxFee := v1.Group("/trxfee")
 		trxFee.GET(":trx_hash", c.GetSingleTrxFee)
+		trxFee.GET("/list", c.GetTrxFeeList)
 	}
 
 	return r

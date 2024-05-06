@@ -11,6 +11,7 @@ import (
 
 type TrxFeeService interface {
 	GetSingleTrxFee(ctx context.Context, req *GetSingleTrxFeeRequest) (*GetSingleTrxFeeResponse, error)
+	GetTrxFeeList(ctx context.Context, req *GetTrxFeeListRequest) (*GetTrxFeeListResponse, error)
 }
 
 type trxFeeService struct {
@@ -97,11 +98,11 @@ func (c *trxFeeService) GetSingleTrxFee(ctx context.Context, req *GetSingleTrxFe
 }
 
 type GetTrxFeeListRequest struct {
-	symbol    string
-	startTime int64
-	endTime   int64
-	page      int
-	limit     int
+	Symbol    string
+	StartTime int64
+	EndTime   int64
+	Page      int
+	Limit     int
 }
 
 type GetTrxFeeListResponse struct {
@@ -109,5 +110,17 @@ type GetTrxFeeListResponse struct {
 }
 
 func (c *trxFeeService) GetTrxFeeList(ctx context.Context, req *GetTrxFeeListRequest) (*GetTrxFeeListResponse, error) {
-	return nil, nil
+	if req == nil {
+		return nil, errors.New("nil req")
+	}
+	res, err := c.repo.ListTrxFee(req.symbol, req.startTime, req.endTime, req.page, req.limit)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(res) == 0 {
+		return &GetTrxFeeListResponse{}, nil
+	}
+
+	return &GetTrxFeeListResponse{Result: res}, nil
 }
