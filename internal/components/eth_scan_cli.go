@@ -8,12 +8,15 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/jaime1129/fedex/internal/util"
 	"go.uber.org/ratelimit"
 )
 
 type EthScanCli interface {
 	QueryTrxFee(trxHash string) (*EthScanTrxResponse, error)
 	QueryBlock(blockNumber string) (*EthScanBlockResponse, error)
+	GetLatestBlock() (int64, error)
+	QueryHistoricalTrxs(req *QueryHistoricalTrxsReq) (*QueryHistoricalTrxsResp, error)
 }
 
 type ethScanCli struct {
@@ -122,7 +125,7 @@ func (c *ethScanCli) QueryBlock(blockNumber string) (*EthScanBlockResponse, erro
 type QueryHistoricalTrxsReq struct {
 	Address    string
 	StartBlock int64
-	EndBlock   int64
+	EndBlock   *int64 // optional
 	Page       int64
 	Offset     int64
 	Sort       string
@@ -142,6 +145,7 @@ const (
 
 // Transaction details within the 'result' array
 type Transaction struct {
+	Hash              string `json:"hash"`
 	BlockNumber       string `json:"blockNumber"`
 	TimeStamp         string `json:"timeStamp"`
 	Gas               string `json:"gas"`
@@ -158,15 +162,17 @@ func (c *ethScanCli) QueryHistoricalTrxs(req *QueryHistoricalTrxsReq) (*QueryHis
 	}
 
 	url := fmt.Sprintf(
-		"https://api.etherscan.io/api?module=account&action=txlist&address=%s&startblock=%d&endblock=%d&page=%d&offset=%d&sort=%s&apikey=%s",
+		"https://api.etherscan.io/api?module=account&action=txlist&address=%s&startblock=%d&page=%d&offset=%d&sort=%s&apikey=%s",
 		req.Address,
 		req.StartBlock,
-		req.EndBlock,
 		req.Page,
 		req.Offset,
 		req.Sort,
 		c.apiKey,
 	)
+	if req.EndBlock != nil {
+		url = url + fmt.Sprintf("&endblock=%d", *req.EndBlock)
+	}
 
 	log.Println("ethscan api url: " + url)
 	resp, err := http.Get(url)
@@ -202,20 +208,20 @@ type GetLatestBlockResp struct {
 	Error       EthScanError `json:"error"`
 }
 
-func (c *ethScanCli) GetLatestBlock() (*GetLatestBlockResp, error) {
+func (c *ethScanCli) GetLatestBlock() (int64, error) {
 	c.rl.Take()
 	// send query to etherscan api
 	url := fmt.Sprintf("https://api.etherscan.io/api?module=proxy&action=eth_blockNumber&apikey=%s", c.apiKey)
 	log.Println("ethscan api url: " + url)
 	resp, err := http.Get(url)
 	if err != nil {
-		return nil, err
+		return 0, err
 	}
 	defer resp.Body.Close()
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return nil, err
+		return 0, err
 	}
 
 	log.Println("ethscan api resp body: " + string(body))
@@ -223,14 +229,18 @@ func (c *ethScanCli) GetLatestBlock() (*GetLatestBlockResp, error) {
 	trxResp := &GetLatestBlockResp{}
 	err = json.Unmarshal(body, trxResp)
 	if err != nil {
-		return nil, err
+		return 0, err
 	}
 
 	// check if api call returns error
 	if trxResp.Error.Code != 0 {
 		log.Println("ethscan api call returns error: " + trxResp.Error.Message)
-		return nil, errors.New("ethscan api call returns error")
+		return 0, errors.New("ethscan api call returns error")
 	}
 
-	return trxResp, nil
+	blockNum, err := util.HexToInt(trxResp.BlockNumber)
+	if err != nil {
+		return 0, err
+	}
+	return blockNum, nil
 }
