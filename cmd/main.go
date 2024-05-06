@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jaime1129/fedex/config"
 	"github.com/jaime1129/fedex/docs"
 	"github.com/jaime1129/fedex/internal/components"
 	"github.com/jaime1129/fedex/internal/controller"
@@ -33,8 +34,19 @@ func main() {
 	// Set the output of the standard logger to the file
 	log.SetOutput(logFile)
 
-	ethscanAPIKey := os.Getenv("ETHSCAN_API_KEY")
-	dsn := fmt.Sprintf("%s:%s@tcp(localhost:%s)/%s", os.Getenv("MYSQL_USER"), os.Getenv("MYSQL_ROOT_PASSWORD"), os.Getenv("MYSQL_PORT"), os.Getenv("MYSQL_DATABASE"))
+	conf, err := config.ReadConfig("./config.yml")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ethscanAPIKey := conf.APIKey
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s",
+		conf.Database.Username,
+		conf.Database.Password,
+		conf.Database.Host,
+		conf.Database.Port,
+		conf.Database.DBName,
+	)
 	ethScanCli := components.NewEthScanCli(ethscanAPIKey)
 	bnPriceCli := components.NewBnPriceCLi()
 

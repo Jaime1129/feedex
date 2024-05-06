@@ -1,0 +1,172 @@
+2024/05/06 17:55:01 yaml: line 5: found character that cannot start any token
+2024/05/06 17:55:21 ethscan api url: https://api.etherscan.io/api?module=proxy&action=eth_blockNumber&apikey=
+2024/05/06 17:55:22 ethscan api resp body: {"jsonrpc":"2.0","id":83,"result":"0x12e47e9"}
+
+2024/05/06 17:55:23 tracking historical data...
+2024/05/06 17:55:23 refresh live data...
+2024/05/06 17:55:23 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=1&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:23 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.97000000","3204.10000000","17.55560000",1714989359999,"56248.80270600",94,"9.96980000","31943.40872600","0"]]
+2024/05/06 17:55:23 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:23 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:23 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:23 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:23 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:24 refresh live data...
+2024/05/06 17:55:24 tracking historical data...
+2024/05/06 17:55:24 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=1&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:24 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.97000000","3204.10000000","17.87350000",1714989359999,"57267.38609600",96,"9.96980000","31943.40872600","0"]]
+2024/05/06 17:55:24 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:24 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:24 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:24 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:24 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:25 refresh live data...
+2024/05/06 17:55:25 tracking historical data...
+2024/05/06 17:55:25 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=1&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:25 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.97000000","3204.11000000","19.37790000",1714989359999,"62087.64918000",98,"11.47420000","36763.67181000","0"]]
+2024/05/06 17:55:25 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:25 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:25 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:25 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:25 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:26 tracking historical data...
+2024/05/06 17:55:26 refresh live data...
+2024/05/06 17:55:26 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=1&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:26 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.97000000","3204.10000000","36.77320000",1714989359999,"117823.92991000",105,"11.47420000","36763.67181000","0"]]
+2024/05/06 17:55:26 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:26 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:26 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:26 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:26 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:27 refresh live data...
+2024/05/06 17:55:27 tracking historical data...
+2024/05/06 17:55:27 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=1&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:27 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.97000000","3204.11000000","36.78200000",1714989359999,"117852.12602500",108,"11.47770000","36774.88619500","0"]]
+2024/05/06 17:55:27 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:27 ethscan api resp body: {"status":"1","message":"OK-Missing/Invalid API Key, rate limit of 1/5sec applied","result":[{"blockNumber":"19617515","timeStamp":"1712658767","hash":"0x7ad0b3e7141b4a7882b7116bc32fd20d981acadb0e14f851adddcdef5c93cc8d","nonce":"19","blockHash":"0x2085f38991906ca55431433633172d5f6e05f55848eedaa644c2355f9cf22090","transactionIndex":"133","from":"0x5389a0f9236cfaad5eecfae0f6d724c550914766","to":"0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640","value":"0","gas":"250000","gasPrice":"19206622943","isError":"1","txreceipt_status":"0","input":"0x128acb080000000000000000000000005389a0f9236cfaad5eecfae0f6d724c55091476600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002faf0800000000000000000000000000000000000000039f7d7d3910c2c5e2cdc011d3600000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000000","contractAddress":"","cumulativeGasUsed":"10987098","gasUsed":"25573","confirmations":"192767","methodId":"0x128acb08","functionName":"swap(address recipient, bool zeroForOne, int256 amountSpecified, uint160 sqrtPriceLimitX96, bytes data)"}]}
+2024/05/06 17:55:27 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:27 binance api resp body: [[1712577600000,"3633.07000000","3730.71000000","3612.00000000","3694.61000000","234791.03700000",1712620799999,"859906509.26639600",581327,"125100.74470000","458184460.71783500","0"],[1712620800000,"3694.61000000","3727.34000000","3580.57000000","3632.85000000","223331.47720000",1712663999999,"816295241.57773900",521356,"105127.80430000","384478807.08717500","0"],[1712664000000,"3632.85000000","3643.37000000","3450.46000000","3506.39000000","234260.77480000",1712707199999,"827315610.17318100",525123,"115419.28500000","407470289.27250200","0"],[1712707200000,"3506.40000000","3554.19000000","3465.64000000","3521.32000000","150407.66100000",1712750399999,"528265138.67466500",383902,"73972.35210000","259889459.20072200","0"]]
+2024/05/06 17:55:27 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:28 refresh live data...
+2024/05/06 17:55:28 tracking historical data...
+2024/05/06 17:55:28 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=2&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:28 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.97000000","3204.11000000","36.78360000",1714989359999,"117857.25260100",109,"11.47930000","36780.01277100","0"]]
+2024/05/06 17:55:28 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:28 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:28 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:28 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:28 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:29 refresh live data...
+2024/05/06 17:55:29 tracking historical data...
+2024/05/06 17:55:29 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=2&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:29 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.97000000","3204.11000000","36.78670000",1714989359999,"117867.18534200",110,"11.48240000","36789.94551200","0"]]
+2024/05/06 17:55:29 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:29 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:29 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:29 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:29 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:30 refresh live data...
+2024/05/06 17:55:30 tracking historical data...
+2024/05/06 17:55:30 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=2&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:30 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.97000000","3204.10000000","36.79230000",1714989359999,"117885.12830200",111,"11.48240000","36789.94551200","0"]]
+2024/05/06 17:55:30 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:30 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:30 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:30 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:30 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:31 tracking historical data...
+2024/05/06 17:55:31 refresh live data...
+2024/05/06 17:55:31 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=2&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:31 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.97000000","3204.11000000","36.90870000",1714989359999,"118258.08670600",112,"11.59880000","37162.90391600","0"]]
+2024/05/06 17:55:31 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:31 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:31 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:32 tracking historical data...
+2024/05/06 17:55:32 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=2&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:32 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:32 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:32 ethscan api resp body: {"status":"0","message":"No transactions found","result":[]}
+2024/05/06 17:55:32 ethscan api call not ok: 0, No transactions found
+2024/05/06 17:55:32 query history trx err: ethscan api call returns error
+2024/05/06 17:55:32 refresh live data...
+2024/05/06 17:55:32 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.97000000","3204.11000000","37.24000000",1714989359999,"119319.60827100",119,"11.92230000","38199.43350100","0"]]
+2024/05/06 17:55:32 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:33 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:33 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:33 refresh live data...
+2024/05/06 17:55:33 tracking historical data...
+2024/05/06 17:55:33 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=2&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:33 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.71000000","3203.71000000","50.35180000",1714989359999,"161331.05833500",146,"11.92660000","38213.20945400","0"]]
+2024/05/06 17:55:33 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:33 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:33 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:33 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:33 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:34 tracking historical data...
+2024/05/06 17:55:34 refresh live data...
+2024/05/06 17:55:34 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=2&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:34 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.20000000","3203.20000000","54.80160000",1714989359999,"175586.66473700",168,"11.94550000","38273.75012300","0"]]
+2024/05/06 17:55:34 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:34 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:34 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:34 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:34 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:35 refresh live data...
+2024/05/06 17:55:35 tracking historical data...
+2024/05/06 17:55:35 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=2&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:35 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.20000000","3203.20000000","54.80500000",1714989359999,"175597.55561700",169,"11.94550000","38273.75012300","0"]]
+2024/05/06 17:55:35 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:35 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:35 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:35 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:35 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:36 tracking historical data...
+2024/05/06 17:55:36 refresh live data...
+2024/05/06 17:55:36 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=2&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:36 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.20000000","3203.21000000","54.92370000",1714989359999,"175977.77664400",171,"12.06420000","38653.97115000","0"]]
+2024/05/06 17:55:36 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:36 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:36 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:36 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:36 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:37 refresh live data...
+2024/05/06 17:55:37 tracking historical data...
+2024/05/06 17:55:37 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=2&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:37 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.20000000","3203.21000000","55.31470000",1714989359999,"177230.23112900",173,"12.39270000","39706.22563500","0"]]
+2024/05/06 17:55:37 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:37 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:37 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:37 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:37 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:38 tracking historical data...
+2024/05/06 17:55:38 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=2&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:38 refresh live data...
+2024/05/06 17:55:38 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.20000000","3203.21000000","55.33080000",1714989359999,"177281.80268000",175,"12.39580000","39716.15558600","0"]]
+2024/05/06 17:55:38 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:38 ethscan api resp body: {"status":"0","message":"No transactions found","result":[]}
+2024/05/06 17:55:38 ethscan api call not ok: 0, No transactions found
+2024/05/06 17:55:38 query history trx err: ethscan api call returns error
+2024/05/06 17:55:38 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:38 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:39 tracking historical data...
+2024/05/06 17:55:39 refresh live data...
+2024/05/06 17:55:39 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=2&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:39 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.15000000","3203.15000000","55.44160000",1714989359999,"177636.71441900",180,"12.39580000","39716.15558600","0"]]
+2024/05/06 17:55:39 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:39 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:39 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:39 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:39 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:40 refresh live data...
+2024/05/06 17:55:40 tracking historical data...
+2024/05/06 17:55:40 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19617515&page=2&offset=20&sort=asc&apikey=&endblock=19810281
+2024/05/06 17:55:40 binance api resp body: [[1714989300000,"3203.97000000","3204.11000000","3203.15000000","3203.15000000","55.44160000",1714989359999,"177636.71441900",180,"12.39580000","39716.15558600","0"]]
+2024/05/06 17:55:40 ethscan api url: https://api.etherscan.io/api?module=account&action=txlist&address=0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640&startblock=19810281&page=1&offset=20&sort=asc&apikey=
+2024/05/06 17:55:40 Shutting down server...
+2024/05/06 17:55:40 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:40 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:40 historical data tracker stopped
+2024/05/06 17:55:40 ethscan api resp body: {"status":"0","message":"NOTOK","result":"Max rate limit reached, please use API Key for higher rate limit"}
+2024/05/06 17:55:40 query history trx err: json: cannot unmarshal string into Go struct field QueryHistoricalTrxsResp.result of type []components.Transaction
+2024/05/06 17:55:40 live data tracker stopped
+2024/05/06 17:55:45 Server exited

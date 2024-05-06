@@ -3,7 +3,7 @@ USE trx_fee;
 
 -- trx_fee.uni_trx_fee definition
 
-CREATE TABLE `uni_trx_fee` (
+CREATE TABLE IF NOT EXISTS `uni_trx_fee` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'auto-generated primary key',
   `symbol` varchar(100) NOT NULL DEFAULT 'WETH/USDC' COMMENT 'symbol',
   `trx_hash` varchar(100) NOT NULL DEFAULT '' COMMENT 'transaction hash',
@@ -22,7 +22,7 @@ CREATE TABLE `uni_trx_fee` (
 
 -- trx_fee.block_num_record definition
 
-CREATE TABLE `block_num_record` (
+CREATE TABLE IF NOT EXISTS `block_num_record` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `max_block` bigint unsigned NOT NULL DEFAULT '0',
   `symbol` varchar(100) NOT NULL DEFAULT 'WETH/USDC',

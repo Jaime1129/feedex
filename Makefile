@@ -16,3 +16,7 @@ swagger: setup
 	@echo "Generating swagger"
 	go install github.com/swaggo/swag/cmd/swag@latest
 	swag init -g cmd/main.go
+
+build: setup
+	@echo "Building"
+	go build -o feedex cmd/main.go
