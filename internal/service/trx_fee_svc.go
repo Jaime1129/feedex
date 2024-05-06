@@ -5,6 +5,7 @@ import (
 	"errors"
 
 	"github.com/jaime1129/fedex/internal/components"
+	"github.com/jaime1129/fedex/internal/repository"
 	"github.com/jaime1129/fedex/internal/util"
 )
 
@@ -15,15 +16,18 @@ type TrxFeeService interface {
 type trxFeeService struct {
 	ethScanCli components.EthScanCli
 	bnPriceCli components.BnPriceCli
+	repo       repository.Repository
 }
 
 func NewTrxService(
 	ethScanCli components.EthScanCli,
 	bnPriceCli components.BnPriceCli,
+	repo repository.Repository,
 ) TrxFeeService {
 	return &trxFeeService{
 		ethScanCli: ethScanCli,
 		bnPriceCli: bnPriceCli,
+		repo:       repo,
 	}
 }
 
@@ -40,6 +44,18 @@ func (c *trxFeeService) GetSingleTrxFee(ctx context.Context, req *GetSingleTrxFe
 		return nil, errors.New("nil req")
 	}
 
+	// prefering directly querying from db
+	res, err := c.repo.GetTrxFee(req.TrxHash)
+	if err != nil {
+		return nil, err
+	}
+	if res != nil {
+		return &GetSingleTrxFeeResponse{
+			TrxFee: res.TrxFeeUsdt.String(),
+		}, nil
+	}
+
+	// alternatively querying from etherscan api
 	trxResp, err := c.ethScanCli.QueryTrxFee(req.TrxHash)
 	if err != nil {
 		return nil, err
@@ -63,7 +79,7 @@ func (c *trxFeeService) GetSingleTrxFee(ctx context.Context, req *GetSingleTrxFe
 		return nil, err
 	}
 
-	// todo: get eth price in USDT
+	// get eth price in USDT
 	trxTime, err := util.HexToInt(blockResp.Result.Timestamp)
 	if err != nil {
 		return nil, err
@@ -78,4 +94,20 @@ func (c *trxFeeService) GetSingleTrxFee(ctx context.Context, req *GetSingleTrxFe
 	return &GetSingleTrxFeeResponse{
 		TrxFee: gasInETH.Mul(price).String(),
 	}, nil
+}
+
+type GetTrxFeeListRequest struct {
+	symbol    string
+	startTime int64
+	endTime   int64
+	page      int
+	limit     int
+}
+
+type GetTrxFeeListResponse struct {
+	Result []repository.UniTrxFee
+}
+
+func (c *trxFeeService) GetTrxFeeList(ctx context.Context, req *GetTrxFeeListRequest) (*GetTrxFeeListResponse, error) {
+	return nil, nil
 }

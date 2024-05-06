@@ -71,7 +71,7 @@ func main() {
 	}
 
 	time.Sleep(5 * time.Second)
-	log.Println("Server exiting")
+	log.Println("Server exited")
 }
 
 func setupRouter(c controller.TrxFeeController) *gin.Engine {

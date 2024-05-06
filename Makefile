@@ -7,3 +7,7 @@ setup:
 test: setup
 	@echo "Running tests..."
 	go test -v ./...
+
+run: setup
+	@echo "Starting server..."
+	go run cmd/main.go
