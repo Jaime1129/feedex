@@ -11,3 +11,8 @@ test: setup
 run: setup
 	@echo "Starting server..."
 	go run cmd/main.go
+
+swagger: setup
+	@echo "Generating swagger"
+	go install github.com/swaggo/swag/cmd/swag@latest
+	swag init -g cmd/main.go

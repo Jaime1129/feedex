@@ -1,0 +1,97 @@
+definitions:
+  repository.UniTrxFee:
+    properties:
+      blockNumber:
+        type: integer
+      ethUsdtPrice:
+        type: number
+      gasPrice:
+        type: integer
+      gasUsed:
+        type: integer
+      symbol:
+        type: string
+      trxFeeUsdt:
+        type: number
+      trxHash:
+        type: string
+      trxTime:
+        type: integer
+    type: object
+  service.GetTrxFeeListResponse:
+    properties:
+      result:
+        items:
+          $ref: '#/definitions/repository.UniTrxFee'
+        type: array
+    type: object
+info:
+  contact: {}
+paths:
+  /trxfee/{trx_hash}:
+    get:
+      consumes:
+      - application/json
+      description: get trx fee by trx hash
+      parameters:
+      - description: trx hash
+        in: path
+        name: trx_hash
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get trx fee of single trx
+  /trxfee/list:
+    get:
+      consumes:
+      - application/json
+      description: get trx fee by given time period
+      parameters:
+      - description: symbol
+        in: query
+        name: symbol
+        required: true
+        type: string
+      - description: start timestamp
+        in: query
+        name: start_time
+        required: true
+        type: integer
+      - description: end timestamp
+        in: query
+        name: end_time
+        required: true
+        type: integer
+      - description: page starting from 0
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: 20 by default
+        in: query
+        name: limit
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/service.GetTrxFeeListResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get a list of trx fee
+swagger: "2.0"

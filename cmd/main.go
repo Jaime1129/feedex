@@ -10,11 +10,14 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jaime1129/fedex/docs"
 	"github.com/jaime1129/fedex/internal/components"
 	"github.com/jaime1129/fedex/internal/controller"
 	"github.com/jaime1129/fedex/internal/jobs"
 	"github.com/jaime1129/fedex/internal/repository"
 	"github.com/jaime1129/fedex/internal/service"
+	"github.com/swaggo/files"       // swagger embed files
+	"github.com/swaggo/gin-swagger" // gin-swagger middleware
 )
 
 func main() {
@@ -76,13 +79,13 @@ func main() {
 
 func setupRouter(c controller.TrxFeeController) *gin.Engine {
 	r := gin.Default()
-
+	docs.SwaggerInfo.BasePath = "/api/v1"
 	v1 := r.Group("/api/v1")
 	{
 		trxFee := v1.Group("/trxfee")
 		trxFee.GET(":trx_hash", c.GetSingleTrxFee)
 		trxFee.GET("/list", c.GetTrxFeeList)
 	}
-
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	return r
 }
