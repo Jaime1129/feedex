@@ -15,9 +15,9 @@ type trxFeeController struct {
 	svc service.TrxFeeService
 }
 
-func NewTrxController(ethScanAPIKey string) TrxFeeController {
+func NewTrxController(svc service.TrxFeeService) TrxFeeController {
 	return &trxFeeController{
-		svc: service.NewTrxService(ethScanAPIKey),
+		svc: svc,
 	}
 }
 

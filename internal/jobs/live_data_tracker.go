@@ -16,27 +16,35 @@ const WETHUSDC = "WETH/USDC"
 const WETHUSDCPOOLADDRESS = "0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640"
 
 type DataTracker interface {
+	Run()
+	Stop()
 }
 
 type dataTracker struct {
+	ctx        context.Context
+	cancel     func()
 	ethScanCli components.EthScanCli
 	bnCli      components.BnPriceCli
 	repo       repository.Repository
 }
 
 func NewDataTracker(
+	ctx context.Context,
 	ethScanCli components.EthScanCli,
 	bnCli components.BnPriceCli,
 	repo repository.Repository,
 ) DataTracker {
+	ctx, cancel := context.WithCancel(ctx)
 	return &dataTracker{
+		ctx:        ctx,
+		cancel:     cancel,
 		ethScanCli: ethScanCli,
 		bnCli:      bnCli,
 		repo:       repo,
 	}
 }
 
-func (t *dataTracker) Run(ctx context.Context) {
+func (t *dataTracker) Run() {
 	resp, err := t.ethScanCli.GetLatestBlock()
 	if err != nil || resp == 0 {
 		log.Fatal("get latest block err: " + err.Error())
@@ -44,12 +52,16 @@ func (t *dataTracker) Run(ctx context.Context) {
 	}
 
 	go func() {
-		t.TrackLiveData(ctx, resp)
+		t.TrackLiveData(t.ctx, resp)
 	}()
 
 	go func() {
-		t.TrackHistoricalData(ctx, resp)
+		t.TrackHistoricalData(t.ctx, resp)
 	}()
+}
+
+func (t *dataTracker) Stop() {
+	t.cancel()
 }
 
 func (t *dataTracker) TrackLiveData(ctx context.Context, latestBlockNumber int64) {

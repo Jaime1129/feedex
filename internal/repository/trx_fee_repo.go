@@ -21,9 +21,8 @@ type repository struct {
 	db *sql.DB
 }
 
-func NewRepository() Repository {
+func NewRepository(dsn string) Repository {
 	// Update the DSN as per your user, password, host, and database details
-	dsn := "root:@jaime1129@tcp(localhost:3306)/trx_fee"
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		log.Fatal("Error connecting to the database: ", err)

@@ -10,11 +10,34 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jaime1129/fedex/internal/components"
 	"github.com/jaime1129/fedex/internal/controller"
+	"github.com/jaime1129/fedex/internal/jobs"
+	"github.com/jaime1129/fedex/internal/repository"
+	"github.com/jaime1129/fedex/internal/service"
 )
 
 func main() {
-	router := setupRouter()
+	ctx := context.Background()
+
+	ethscanAPIKey := "28I2TNRKKSUMM4QNMP6B9AICEQTJIE3978"
+	dsn := "root:@jaime1129@tcp(localhost:3306)/trx_fee"
+	ethScanCli := components.NewEthScanCli(ethscanAPIKey)
+	bnPriceCli := components.NewBnPriceCLi()
+
+	svc := service.NewTrxService(ethScanCli, bnPriceCli)
+	repo := repository.NewRepository(dsn)
+
+	t := jobs.NewDataTracker(
+		ctx,
+		ethScanCli,
+		bnPriceCli,
+		repo,
+	)
+	t.Run()
+
+	c := controller.NewTrxController(svc)
+	router := setupRouter(c)
 
 	srv := &http.Server{
 		Addr:    ":8080",
@@ -36,8 +59,9 @@ func main() {
 
 	// The context is used to inform the server it has 5 seconds to finish
 	// the request it is currently handling
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
 	defer cancel()
+	t.Stop()
 	if err := srv.Shutdown(ctx); err != nil {
 		log.Fatal("Server forced to shutdown:", err)
 	}
@@ -45,10 +69,8 @@ func main() {
 	log.Println("Server exiting")
 }
 
-func setupRouter() *gin.Engine {
+func setupRouter(c controller.TrxFeeController) *gin.Engine {
 	r := gin.Default()
-	ethscanAPIKey := "28I2TNRKKSUMM4QNMP6B9AICEQTJIE3978"
-	c := controller.NewTrxController(ethscanAPIKey)
 
 	v1 := r.Group("/api/v1")
 	{

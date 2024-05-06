@@ -13,16 +13,17 @@ type TrxFeeService interface {
 }
 
 type trxFeeService struct {
-	apiKey     string
 	ethScanCli components.EthScanCli
 	bnPriceCli components.BnPriceCli
 }
 
-func NewTrxService(apiKey string) TrxFeeService {
+func NewTrxService(
+	ethScanCli components.EthScanCli,
+	bnPriceCli components.BnPriceCli,
+) TrxFeeService {
 	return &trxFeeService{
-		apiKey:     apiKey,
-		ethScanCli: components.NewEthScanCli(apiKey),
-		bnPriceCli: components.NewBnPriceCLi(),
+		ethScanCli: ethScanCli,
+		bnPriceCli: bnPriceCli,
 	}
 }
 
