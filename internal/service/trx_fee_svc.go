@@ -113,7 +113,7 @@ func (c *trxFeeService) GetTrxFeeList(ctx context.Context, req *GetTrxFeeListReq
 	if req == nil {
 		return nil, errors.New("nil req")
 	}
-	res, err := c.repo.ListTrxFee(req.symbol, req.startTime, req.endTime, req.page, req.limit)
+	res, err := c.repo.ListTrxFee(req.Symbol, req.StartTime, req.EndTime, req.Page, req.Limit)
 	if err != nil {
 		return nil, err
 	}

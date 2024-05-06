@@ -107,7 +107,7 @@ func (r *repository) GetMaxBlockNum(symbol string) (uint64, error) {
 }
 
 func (r *repository) GetTrxFee(txHash string) (*UniTrxFee, error) {
-	query := "SELECT symbol, trx_hash, trx_time, gas_used, gas_price, eth_usdt_price, trx_fee_usdt, block_num FROM uni_trx_fee where tx_hash=?"
+	query := "SELECT symbol, trx_hash, trx_time, gas_used, gas_price, eth_usdt_price, trx_fee_usdt, block_num FROM uni_trx_fee where trx_hash=?"
 	rows, err := r.db.Query(query, txHash)
 	if err == sql.ErrNoRows {
 		return nil, nil
@@ -115,13 +115,17 @@ func (r *repository) GetTrxFee(txHash string) (*UniTrxFee, error) {
 	if err != nil {
 		return nil, err
 	}
-	var fee UniTrxFee
-	err = rows.Scan(&fee.Symbol, &fee.TrxHash, &fee.TrxTime, &fee.GasUsed, &fee.GasPrice, &fee.EthUsdtPrice, &fee.TrxFeeUsdt, &fee.BlockNumber)
-	if err != nil {
-		return nil, err
-	}
-
 	defer rows.Close()
+
+	var fee UniTrxFee
+	if rows.Next() {
+		err = rows.Scan(&fee.Symbol, &fee.TrxHash, &fee.TrxTime, &fee.GasUsed, &fee.GasPrice, &fee.EthUsdtPrice, &fee.TrxFeeUsdt, &fee.BlockNumber)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		return nil, nil
+	}
 
 	return &fee, nil
 }
