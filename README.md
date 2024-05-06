@@ -70,7 +70,7 @@ run `make build`
 befor running, need to set up the mysql database
 1. start mysql server locally
 2. execute `scripts/mysql/init.sql`
-3. modif the `config.yml` accordingly
+3. modify the `config.yml` accordingly
 4. run `make run`
 
 
