@@ -73,6 +73,10 @@ func (c *ethScanCli) QueryTrxFee(trxHash string) (*EthScanTrxResponse, error) {
 
 	// check if api call returns error
 	if trxResp.Error.Code != 0 {
+		// return empty result if no transactions found
+		if trxResp.Error.Message == "No transactions found" {
+			return trxResp, nil
+		}
 		log.Println("ethscan api call returns error: " + trxResp.Error.Message)
 		return nil, errors.New("ethscan api call returns error")
 	}

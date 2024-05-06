@@ -73,7 +73,7 @@ func (t *dataTracker) TrackLiveData(ctx context.Context, latestBlockNumber int64
 		case <-ticker.C:
 			log.Println("refresh live data...")
 			currentUnix := time.Now().Unix()
-			price, err := t.bnCli.QueryETHPrice(currentUnix-60, currentUnix)
+			price, err := t.bnCli.QueryETHPrice(currentUnix-60, currentUnix, components.INTERVAL_1MIN)
 			if err != nil {
 				log.Println("query price err: " + err.Error())
 				continue
@@ -101,12 +101,14 @@ func (t *dataTracker) TrackLiveData(ctx context.Context, latestBlockNumber int64
 				timeStamp, _ := strconv.Atoi(r.TimeStamp)
 				gasUsed, _ := strconv.Atoi(r.GasUsed)
 				gasPrice, _ := strconv.Atoi(r.GasPrice)
+				blockNum, _ := strconv.Atoi(r.BlockNumber)
 				res[i] = repository.UniTrxFee{
 					Symbol:       WETHUSDC,
 					TrxHash:      r.Hash,
 					TrxTime:      uint64(timeStamp),
 					GasUsed:      uint64(gasUsed),
 					GasPrice:     uint64(gasPrice),
+					BlockNumber:  uint64(blockNum),
 					EthUsdtPrice: price,
 					TrxFeeUsdt:   util.CalculateFeeInETH(int64(gasUsed), int64(gasPrice)).Mul(price),
 				}
@@ -121,6 +123,7 @@ func (t *dataTracker) TrackLiveData(ctx context.Context, latestBlockNumber int64
 			initialPage++
 		case <-ctx.Done():
 			log.Println("live data tracker stopped")
+			return
 		}
 
 	}
@@ -155,7 +158,7 @@ func (t *dataTracker) TrackHistoricalData(ctx context.Context, latestBlockNumber
 			}
 			if len(resp.Result) == 0 {
 				log.Println("no transaction to record")
-				continue
+				return
 			}
 
 			maxBlockNum := uint64(0)
@@ -172,15 +175,18 @@ func (t *dataTracker) TrackHistoricalData(ctx context.Context, latestBlockNumber
 				minTime = int64(math.Min(float64(minTime), float64(timeStamp)))
 				maxTime = int64(math.Max(float64(maxTime), float64(timeStamp)))
 				res[i] = repository.UniTrxFee{
-					Symbol:   WETHUSDC,
-					TrxHash:  r.Hash,
-					TrxTime:  uint64(timeStamp),
-					GasUsed:  uint64(gasUsed),
-					GasPrice: uint64(gasPrice),
+					Symbol:      WETHUSDC,
+					TrxHash:     r.Hash,
+					TrxTime:     uint64(timeStamp),
+					GasUsed:     uint64(gasUsed),
+					GasPrice:    uint64(gasPrice),
+					BlockNumber: uint64(blockNum),
 				}
 			}
-
-			price, err := t.bnCli.QueryETHPrice(minTime, maxTime)
+			// query the daily average price
+			avgTime := (minTime + maxTime) / 2
+			daySecs := 24 * 60 * 60
+			price, err := t.bnCli.QueryETHPrice(avgTime-int64(daySecs), maxTime+int64(daySecs), components.INTERVAL_12HOUR)
 			if err != nil {
 				log.Println("query price err: " + err.Error())
 				continue
@@ -199,7 +205,8 @@ func (t *dataTracker) TrackHistoricalData(ctx context.Context, latestBlockNumber
 
 			initialPage++
 		case <-ctx.Done():
-			log.Println("live data tracker stopped")
+			log.Println("historical data tracker stopped")
+			return
 		}
 
 	}

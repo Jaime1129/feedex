@@ -40,6 +40,7 @@ type UniTrxFee struct {
 	TrxTime      uint64
 	GasUsed      uint64
 	GasPrice     uint64
+	BlockNumber  uint64
 	EthUsdtPrice decimal.Decimal
 	TrxFeeUsdt   decimal.Decimal
 }
@@ -49,12 +50,12 @@ func (r *repository) BatchInsertUniTrxFee(fees []UniTrxFee) error {
 	var args []interface{}
 
 	for _, fee := range fees {
-		placeholders = append(placeholders, "(?, ?, ?, ?, ?, ?, ?)")
-		args = append(args, fee.Symbol, fee.TrxHash, fee.TrxTime, fee.GasUsed, fee.GasPrice, fee.EthUsdtPrice.String(), fee.TrxFeeUsdt.String())
+		placeholders = append(placeholders, "(?, ?, ?, ?, ?, ?, ?, ?)")
+		args = append(args, fee.Symbol, fee.TrxHash, fee.TrxTime, fee.GasUsed, fee.GasPrice, fee.EthUsdtPrice.String(), fee.TrxFeeUsdt.String(), fee.BlockNumber)
 	}
 
 	// use ignore to avoid dup key conflict error
-	stmt := fmt.Sprintf("INSERT IGNORE INTO uni_trx_fee (symbol, trx_hash, trx_time, gas_used, gas_price, eth_usdt_price, trx_fee_usdt) VALUES %s",
+	stmt := fmt.Sprintf("INSERT IGNORE INTO uni_trx_fee (symbol, trx_hash, trx_time, gas_used, gas_price, eth_usdt_price, trx_fee_usdt, block_num) VALUES %s",
 		strings.Join(placeholders, ", "))
 
 	_, err := r.db.Exec(stmt, args...)
@@ -93,6 +94,9 @@ func (r *repository) BatchRecordHistoricalTrx(fees []UniTrxFee, symbol string, m
 func (r *repository) GetMaxBlockNum(symbol string) (uint64, error) {
 	var blockNum uint64
 	err := r.db.QueryRow("SELECT max_block FROM block_num_record WHERE symbol = ?", symbol).Scan(&blockNum)
+	if err == sql.ErrNoRows {
+		return 0, nil
+	}
 	if err != nil {
 		return 0, err
 	}

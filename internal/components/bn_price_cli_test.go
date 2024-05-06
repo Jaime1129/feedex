@@ -24,7 +24,7 @@ var _ = ginkgo.Describe("BnPriceCli", func() {
 		httpmock.RegisterResponder("GET", "https://api.binance.com/api/v3/klines",
 			httpmock.NewStringResponder(200, `[["", "100.5", "", "", "101.5"]]`))
 
-		price, err := client.QueryETHPrice(1609459200, 1609545600)
+		price, err := client.QueryETHPrice(1609459200, 1609545600, INTERVAL_1MIN)
 		gomega.Expect(err).Should(gomega.BeNil())
 		gomega.Expect(price.String()).To(gomega.Equal("101"))
 	})
@@ -33,7 +33,7 @@ var _ = ginkgo.Describe("BnPriceCli", func() {
 		httpmock.RegisterResponder("GET", "https://api.binance.com/api/v3/klines",
 			httpmock.NewStringResponder(500, ""))
 
-		_, err := client.QueryETHPrice(1609459200, 1609545600)
+		_, err := client.QueryETHPrice(1609459200, 1609545600, INTERVAL_1MIN)
 		gomega.Expect(err).ShouldNot(gomega.BeNil())
 	})
 
@@ -41,7 +41,7 @@ var _ = ginkgo.Describe("BnPriceCli", func() {
 		httpmock.RegisterResponder("GET", "https://api.binance.com/api/v3/klines",
 			httpmock.NewStringResponder(200, `[]`))
 
-		_, err := client.QueryETHPrice(1609459200, 1609545600)
+		_, err := client.QueryETHPrice(1609459200, 1609545600, INTERVAL_1MIN)
 		gomega.Expect(err).ShouldNot(gomega.BeNil())
 		gomega.Expect(err.Error()).To(gomega.Equal("price not found"))
 	})

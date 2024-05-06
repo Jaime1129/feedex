@@ -61,11 +61,16 @@ func main() {
 	// the request it is currently handling
 	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
 	defer cancel()
-	t.Stop()
 	if err := srv.Shutdown(ctx); err != nil {
 		log.Fatal("Server forced to shutdown:", err)
 	}
 
+	{
+		t.Stop()
+		repo.Close()
+	}
+
+	time.Sleep(5 * time.Second)
 	log.Println("Server exiting")
 }
 

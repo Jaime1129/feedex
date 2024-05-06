@@ -70,7 +70,7 @@ func (c *trxFeeService) GetSingleTrxFee(ctx context.Context, req *GetSingleTrxFe
 	}
 
 	// fetch the average price of [trxTime-60, trxTime+60]
-	price, err := c.bnPriceCli.QueryETHPrice(trxTime-60, trxTime+60)
+	price, err := c.bnPriceCli.QueryETHPrice(trxTime-60, trxTime+60, components.INTERVAL_1MIN)
 	if err != nil {
 		return nil, err
 	}

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 
 	"github.com/shopspring/decimal"
@@ -12,9 +13,11 @@ import (
 )
 
 const ETHUSDT = "ETHUSDT"
+const INTERVAL_1MIN = "1m"
+const INTERVAL_12HOUR = "12h"
 
 type BnPriceCli interface {
-	QueryETHPrice(start int64, end int64) (price decimal.Decimal, err error)
+	QueryETHPrice(start int64, end int64, interval string) (price decimal.Decimal, err error)
 }
 
 type bnPriceCli struct {
@@ -27,9 +30,9 @@ func NewBnPriceCLi() BnPriceCli {
 	}
 }
 
-func (c *bnPriceCli) QueryETHPrice(start int64, end int64) (price decimal.Decimal, err error) {
+func (c *bnPriceCli) QueryETHPrice(start int64, end int64, interval string) (price decimal.Decimal, err error) {
 	c.rl.Take()
-	url := fmt.Sprintf("https://api.binance.com/api/v3/klines?symbol=%s&interval=%s&startTime=%d&endTime=%d", ETHUSDT, "1m", start*1e3, end*1e3)
+	url := fmt.Sprintf("https://api.binance.com/api/v3/klines?symbol=%s&interval=%s&startTime=%d&endTime=%d", ETHUSDT, interval, start*1e3, end*1e3)
 	resp, err := http.Get(url)
 	if err != nil {
 		return
@@ -41,7 +44,7 @@ func (c *bnPriceCli) QueryETHPrice(start int64, end int64) (price decimal.Decima
 		return
 	}
 
-	fmt.Println("binance api resp body: " + string(body))
+	log.Println("binance api resp body: " + string(body))
 
 	var rawCandlesticks [][]interface{}
 	err = json.Unmarshal(body, &rawCandlesticks)
