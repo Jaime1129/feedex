@@ -6,7 +6,6 @@ import (
 
 	"github.com/jaime1129/fedex/internal/components"
 	"github.com/jaime1129/fedex/internal/util"
-	"github.com/shopspring/decimal"
 )
 
 type TrxFeeService interface {

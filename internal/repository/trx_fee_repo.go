@@ -12,6 +12,8 @@ import (
 
 type Repository interface {
 	BatchInsertUniTrxFee(fees []UniTrxFee) error
+	GetMaxBlockNum(symbol string) (uint64, error)
+	BatchRecordHistoricalTrx(fees []UniTrxFee, symbol string, maxBlock uint64) error
 	Close()
 }
 
@@ -52,7 +54,8 @@ func (r *repository) BatchInsertUniTrxFee(fees []UniTrxFee) error {
 		args = append(args, fee.Symbol, fee.TrxHash, fee.TrxTime, fee.GasUsed, fee.GasPrice, fee.EthUsdtPrice.String(), fee.TrxFeeUsdt.String())
 	}
 
-	stmt := fmt.Sprintf("INSERT INTO uni_trx_fee (symbol, trx_hash, trx_time, gas_used, gas_price, eth_usdt_price, trx_fee_usdt) VALUES %s",
+	// use ignore to avoid dup key conflict error
+	stmt := fmt.Sprintf("INSERT IGNORE INTO uni_trx_fee (symbol, trx_hash, trx_time, gas_used, gas_price, eth_usdt_price, trx_fee_usdt) VALUES %s",
 		strings.Join(placeholders, ", "))
 
 	_, err := r.db.Exec(stmt, args...)
@@ -60,4 +63,40 @@ func (r *repository) BatchInsertUniTrxFee(fees []UniTrxFee) error {
 		return err
 	}
 	return nil
+}
+
+// batch insert historical trxs and record the maximum block number
+func (r *repository) BatchRecordHistoricalTrx(fees []UniTrxFee, symbol string, maxBlock uint64) error {
+	tx, err := r.db.Begin()
+	if err != nil {
+		return err
+	}
+
+	err = r.BatchInsertUniTrxFee(fees)
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	_, err = r.db.Exec("INSERT INTO block_num_record (symbol, max_block) VALUES (?,?) ON DUPLICATE KEY UPDATE max_block=?", symbol, maxBlock, maxBlock)
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	err = tx.Commit()
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (r *repository) GetMaxBlockNum(symbol string) (uint64, error) {
+	var blockNum uint64
+	err := r.db.QueryRow("SELECT max_block FROM block_num_record WHERE symbol = ?", symbol).Scan(&blockNum)
+	if err != nil {
+		return 0, err
+	}
+
+	return blockNum, nil
 }
