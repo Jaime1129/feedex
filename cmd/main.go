@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -22,9 +23,18 @@ import (
 
 func main() {
 	ctx := context.Background()
+	// Open a file for logging
+	logFile, err := os.OpenFile("application.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer logFile.Close()
 
-	ethscanAPIKey := "28I2TNRKKSUMM4QNMP6B9AICEQTJIE3978"
-	dsn := "root:@jaime1129@tcp(localhost:3306)/trx_fee"
+	// Set the output of the standard logger to the file
+	log.SetOutput(logFile)
+
+	ethscanAPIKey := os.Getenv("ETHSCAN_API_KEY")
+	dsn := fmt.Sprintf("%s:%s@tcp(localhost:%s)/%s", os.Getenv("MYSQL_USER"), os.Getenv("MYSQL_ROOT_PASSWORD"), os.Getenv("MYSQL_PORT"), os.Getenv("MYSQL_DATABASE"))
 	ethScanCli := components.NewEthScanCli(ethscanAPIKey)
 	bnPriceCli := components.NewBnPriceCLi()
 

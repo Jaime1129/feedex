@@ -1,0 +1,28 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=trx_fee
+      - MYSQL_PORT=3307
+      - ETHSCAN_API_KEY=28I2TNRKKSUMM4QNMP6B9AICEQTJIE3978
+
+  db:
+    image: mysql:5.7
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: trx_fee
+    ports:
+      - "3307:3307"
+    volumes:
+      - ./script/mysql:/docker-entrypoint-initdb.d
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
